@@ -123,36 +123,42 @@ public class CircularLinkedList{
     
     // to remove the element from the list of specified data
     public int remove(int data){
-        
-        if(tail == null) return Integer.MIN_VALUE;
-        CllNode temp = tail.getNext();
+        if(isEmpty()){
+            return Integer.MIN_VALUE;
+        }
+        CllNode atPos = tail.getNext();
         CllNode previous = tail;
         
-        int element;
-        for(element = 0 ; element < length && (!(temp.getData() == data)) ; element++){
+        for(int i = 0 ; i < length && (!(atPos.getData() == data)) ; i++ ){
             previous = previous.getNext();
-            temp = temp.getNext();
+            atPos = atPos.getNext();
         }
         
-        if(temp.getData() == data){
-            
-            
-        if(tail == tail.getNext()){
-            tail = null;
-             
+        if(atPos.getData() == data){
+            if(tail == tail.getNext()){
+                tail = null;
+               
+            }
+            else{
+                if(atPos == tail){
+                    
+                  
+                  previous.setNext(previous.getNext().getNext());
+                  tail = previous;                     
+                }else{
+                    previous.setNext(previous.getNext().getNext());
+                    
+                }
+                
+                
+            }
+            atPos.setNext(null);
+            length--;
+            return atPos.getData();
         }
         else{
-            if(temp == tail){
-                tail = previous;
-                previous.setNext(previous.getNext().getNext());
-            }
-            
+            return Integer.MIN_VALUE;
         }
-        temp.setNext(null);
-        length--;
-        return temp.getData();    
-        }
-        else return Integer.MAX_VALUE;
         
     }
     public int size(){
