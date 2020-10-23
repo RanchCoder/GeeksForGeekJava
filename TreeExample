@@ -1,0 +1,39 @@
+//class will have heterogenous objects , 
+
+public class TreeExample{
+    public static void main(String[] args){
+    //we need a custom Comparator because the list can have Objects which will not implement Comparable.     
+    java.util.TreeSet t1 = new java.util.TreeSet(new MyComparator());
+    t1.add("ABC");
+    t1.add(new StringBuffer("A"));
+    t1.add("ABT");
+    t1.add(new StringBuffer("B"));
+    t1.add("ABM");
+    t1.add(new StringBuffer("AA"));
+    t1.add("ACD");
+    t1.add(new StringBuffer("Aa"));
+    System.out.println(t1);   
+    }
+}
+
+class MyComparator implements java.util.Comparator{
+    
+    public int compare(Object obj1 , Object obj2){
+        
+        String s1 = obj1.toString();
+        String s2 = obj2.toString();
+        int l1 = s1.length();
+        int l2 = s2.length();
+        if(l1 > l2){
+            return 1;
+        }
+        if(l1 < l2){
+            return -1;
+        }
+        else{
+            return s1.compareTo(s2);
+        }
+    }
+    
+    
+}
